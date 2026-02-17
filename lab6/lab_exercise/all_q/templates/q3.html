@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atomic Habits</title>
+    <style>
+        body { font-family: Arial; text-align: center; }
+        img { width: 250px; margin-top: 20px; }
+        a {
+            display: block;
+            margin: 10px;
+            font-size: 18px;
+            text-decoration: none;
+            color: white;
+            background-color: #333;
+            padding: 10px;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+        }
+        a:hover { background-color: #555; }
+    </style>
+</head>
+<body>
+
+<h1>Atomic Habits</h1>
+
+<img src="https://m.media-amazon.com/images/I/81F90H7hnML.jpg">
+
+<a href="{% url 'q3_metadata' %}">Metadata</a>
+<a href="{% url 'q3_reviews' %}">Reviews</a>
+<a href="{% url 'q3_publisher' %}">Publisher Info</a>
+<a href="{% url 'index' %}">Back to Main Page</a>
+
+</body>
+</html>

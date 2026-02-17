@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+#cover {
+    width: 60%;
+    height: 500px;
+    margin: 20px auto;
+    border: 3px solid black;
+    position: relative;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+#coverTitle {
+    margin-top: 20px;
+}
+
+#coverImage {
+    max-width: 80%;
+    height: 250px;
+    margin-top: 20px;
+}
+
+.controls {
+    margin: 10px;
+}
+
+input, select {
+    margin: 5px;
+}
