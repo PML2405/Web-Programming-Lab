@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Q2 - Promotion</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 2px solid #eef2f3;
+            padding-bottom: 15px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back:hover { color: #333; }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        select, input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            background-color: #fff;
+            transition: border-color 0.3s;
+            font-family: inherit;
+            color: #333;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #2196F3;
+            background-color: #fbfbfb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1976D2;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            display: none; 
+        }
+
+        .result-box.visible {
+            display: block;
+        }
+
+        #res {
+            font-weight: 800;
+            font-size: 18px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .status-yes { color: #2e7d32; } 
+        .status-no { color: #c62828; }  
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <a class="back" href="{% url 'index' %}">← Back to Index</a>
+
+    <h2>Promotion Eligibility</h2>
+
+    <div class="form-group">
+        <label>Employee ID</label>
+        <select id="eid">
+            <option value="" disabled selected>Select Employee</option>
+            <option>EMP101</option>
+            <option>EMP102</option>
+            <option>EMP103</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Date of Joining</label>
+        <input type="date" id="doj">
+    </div>
+
+    <button onclick="check()">Check Eligibility</button>
+
+    <div class="result-box" id="resultContainer">
+        <p>Promotion Status:</p>
+        <span id="res"></span>
+    </div>
+</div>
+
+<script>
+function check() {
+    let dateInput = document.getElementById("doj").value;
+    let resultContainer = document.getElementById("resultContainer");
+    let resSpan = document.getElementById("res");
+
+    if (!dateInput) {
+        alert("Please select a joining date.");
+        return;
+    }
+
+    let doj = new Date(dateInput);
+    let today = new Date();
+    
+    let years = today.getFullYear() - doj.getFullYear();
+
+
+    let isEligible = years > 5;
+
+    resultContainer.classList.add("visible");
+
+    if (isEligible) {
+        resSpan.innerText = "YES (Eligible)";
+        resSpan.className = "status-yes";
+    } else {
+        resSpan.innerText = "NO (Not Eligible)";
+        resSpan.className = "status-no";
+    }
+}
+</script>
+
+</body>
+</html>

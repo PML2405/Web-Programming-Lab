@@ -1,0 +1,5 @@
+This is a random text
+
+to reverse a file using python
+
+to read and work on files in python

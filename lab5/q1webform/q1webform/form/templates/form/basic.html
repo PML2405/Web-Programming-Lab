@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Student Details Form</title>
+<style>
+    /* basic styling to make the form look neat */
+    .form-group { margin-bottom: 10px; }
+    label { display: inline-block; width: 150px; }
+    textarea { width: 400px; height: 150px; }
+</style>
+<script type="text/javascript">
+    function processDetails() {
+        // 1. Get values from the input fields
+        var name = document.getElementById("name").value;
+        var dob = document.getElementById("dob").value;
+        var address = document.getElementById("address").value;
+        var contact = document.getElementById("contact").value;
+        var email = document.getElementById("email").value;
+        
+        // Parse marks as integers to perform math
+        var eng = parseInt(document.getElementById("eng").value);
+        var phy = parseInt(document.getElementById("phy").value);
+        var chem = parseInt(document.getElementById("chem").value);
+
+        // 2. Calculate Total and Percentage
+        // Assuming each subject is out of 100
+        var totalMarks = eng + phy + chem;
+        var percentage = (totalMarks / 300) * 100;
+
+        // 3. Format the details string
+        var resultText = "Name: " + name + "\n" +
+                         "Date of Birth: " + dob + "\n" +
+                         "Address: " + address + "\n" +
+                         "Contact: " + contact + "\n" +
+                         "Email: " + email + "\n" +
+                         "English: " + eng + "\n" +
+                         "Physics: " + phy + "\n" +
+                         "Chemistry: " + chem + "\n" +
+                         "-----------------------------\n";
+
+        // 4. Add details to the textarea (appending to existing text)
+        document.getElementById("displayArea").value += resultText;
+
+        // 5. Display the percentage in the label
+        // toFixed(2) restricts it to 2 decimal places
+        document.getElementById("lblPercentage").innerHTML = "Total Percentage: " + percentage.toFixed(2) + "%";
+    }
+</script>
+</head>
+<body>
+
+<h2>Enter Student Details</h2>
+
+<div class="form-group">
+    <label>Name:</label> <input type="text" id="name">
+</div>
+<div class="form-group">
+    <label>Date of Birth:</label> <input type="date" id="dob">
+</div>
+<div class="form-group">
+    <label>Address:</label> <input type="text" id="address">
+</div>
+<div class="form-group">
+    <label>Contact Number:</label> <input type="text" id="contact">
+</div>
+<div class="form-group">
+    <label>Email ID:</label> <input type="email" id="email">
+</div>
+
+<h3>Enter Marks (Out of 100)</h3>
+<div class="form-group">
+    <label>English:</label> <input type="number" id="eng">
+</div>
+<div class="form-group">
+    <label>Physics:</label> <input type="number" id="phy">
+</div>
+<div class="form-group">
+    <label>Chemistry:</label> <input type="number" id="chem">
+</div>
+
+<br>
+<button onclick="processDetails()">Submit Details</button>
+
+<br><br>
+
+<label><strong>Student Record:</strong></label><br>
+<textarea id="displayArea" readonly></textarea>
+<br><br>
+<label id="lblPercentage" style="font-weight:bold; color:blue;"></label>
+
+</body>
+</html>

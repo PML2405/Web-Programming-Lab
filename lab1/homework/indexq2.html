@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Population Table (JS)</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 2rem auto;
+            font-family: Arial, sans-serif;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 8px 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: red;
+            color: white;
+        }
+
+        .country {
+            background-color: #ffe599;
+            font-weight: bold;
+        }
+
+        .year {
+            background-color: #9fc5e8;
+        }
+
+        .population {
+            background-color: #b6d7a8;
+        }
+    </style>
+</head>
+<body>
+
+<table id="populationTable">
+    <tr>
+        <th>Country</th>
+        <th>Year</th>
+        <th>Population (In Crores)</th>
+    </tr>
+</table>
+
+<script>
+    const data = [
+        { country: "INDIA", year: 1998, population: 85 },
+        { country: "INDIA", year: 1999, population: 90 },
+        { country: "INDIA", year: 2000, population: 100 },
+        { country: "USA", year: 1998, population: 30 },
+        { country: "USA", year: 1999, population: 35 },
+        { country: "USA", year: 2000, population: 40 },
+        { country: "UK", year: 1998, population: 25 },
+        { country: "UK", year: 1999, population: 30 },
+        { country: "UK", year: 2000, population: 35 }
+    ];
+
+    const table = document.getElementById("populationTable");
+    let countryCount = {};
+
+    data.forEach(item => {
+        countryCount[item.country] = (countryCount[item.country] || 0) + 1;
+    });
+
+    let previousCountry = "";
+
+    data.forEach(item => {
+        const row = document.createElement("tr");
+
+        if (item.country !== previousCountry) {
+            const countryCell = document.createElement("td");
+            countryCell.textContent = item.country;
+            countryCell.className = "country";
+            countryCell.rowSpan = countryCount[item.country];
+            row.appendChild(countryCell);
+            previousCountry = item.country;
+        }
+
+        const yearCell = document.createElement("td");
+        yearCell.textContent = item.year;
+        yearCell.className = "year";
+
+        const popCell = document.createElement("td");
+        popCell.textContent = item.population;
+        popCell.className = "population";
+
+        row.appendChild(yearCell);
+        row.appendChild(popCell);
+
+        table.appendChild(row);
+    });
+</script>
+
+</body>
+</html>

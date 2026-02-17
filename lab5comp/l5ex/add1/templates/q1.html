@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Q1 - Student Details</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back:hover { color: #333; }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background-color: #fcfcfc;
+        }
+
+        .section-title {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #4CAF50;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        textarea#out {
+            border: none;
+            background: transparent;
+            resize: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .percentage-display {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .percentage-display span {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <a class="back" href="{% url 'index' %}">← Back to Index</a>
+
+    <h2>Student Details</h2>
+
+    <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="name" placeholder="John Doe">
+    </div>
+    
+    <div class="row">
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" id="dob">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Address</label>
+        <textarea id="address" rows="2" placeholder="Enter your address..."></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Contact No.</label>
+        <input type="text" id="contact" placeholder="123-456-7890">
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="student@example.com">
+    </div>
+
+    <div class="section-title">Academic Marks</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+        <div class="form-group">
+            <label>English</label>
+            <input type="number" id="e">
+        </div>
+        <div class="form-group">
+            <label>Physics</label>
+            <input type="number" id="p">
+        </div>
+        <div class="form-group">
+            <label>Chemistry</label>
+            <input type="number" id="c">
+        </div>
+    </div>
+
+    <button onclick="calc()">Generate Report</button>
+
+    <div class="result-box">
+        <label>Report Summary:</label>
+        <textarea id="out" rows="6" readonly></textarea>
+        <div class="percentage-display">
+            Percentage: <span id="per">0%</span>
+        </div>
+    </div>
+</div>
+
+<script>
+function calc() {
+    let name = document.getElementById("name").value;
+    let dob = document.getElementById("dob").value;
+    let address = document.getElementById("address").value;
+    let contact = document.getElementById("contact").value;
+    let email = document.getElementById("email").value;
+
+    let e = Number(document.getElementById("e").value);
+    let p = Number(document.getElementById("p").value);
+    let c = Number(document.getElementById("c").value);
+
+    let percent = ((e + p + c) / 3).toFixed(2);
+
+    let outputBox = document.getElementById("out");
+    outputBox.value = 
+        "Name: " + name + 
+        "\nDOB: " + dob + 
+        "\nAddress: " + address + 
+        "\nContact: " + contact + 
+        "\nEmail: " + email;
+
+    document.getElementById("per").innerText = percent + "%";
+}
+</script>
+
+</body>
+</html>

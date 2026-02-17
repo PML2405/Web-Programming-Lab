@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    background: linear-gradient(135deg, #fdf6e3, #f5e6ca);
+    color: #3b2f2f;
+}
+
+.poem {
+    padding: 5%;
+    max-width: 800px;
+    margin: 4rem auto;
+    background-color: #fffaf0;
+    border-left: 6px solid #c89b3c;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.poem h2 {
+    text-align: center;
+    color: #8b5e34;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+p {
+    padding: 1%;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+b {
+    color: #b33a3a;
+    font-weight: bold;
+}
+
+br {
+    line-height: 1.6;
+}

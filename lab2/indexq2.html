@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            text-align: center;
+        }
+
+        #calculator {
+            width: 260px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        #display {
+            width: 90%;
+            height: 40px;
+            font-size: 18px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding-right: 10px;
+        }
+
+        button {
+            width: 50px;
+            height: 40px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div id="calculator">
+    <input type="text" id="display" readonly>
+
+    <br>
+
+    <button class="num">7</button>
+    <button class="num">8</button>
+    <button class="num">9</button>
+    <button class="op">+</button>
+
+    <br>
+
+    <button class="num">4</button>
+    <button class="num">5</button>
+    <button class="num">6</button>
+    <button class="op">-</button>
+
+    <br>
+
+    <button class="num">1</button>
+    <button class="num">2</button>
+    <button class="num">3</button>
+    <button class="op">*</button>
+
+    <br>
+
+    <button class="num">0</button>
+    <button id="clear">C</button>
+    <button id="equals">=</button>
+    <button class="op">/</button>
+</div>
+
+<script>
+    let expression = "";
+
+    $(".num").click(function () {
+        expression += $(this).text();
+        $("#display").val(expression);
+    });
+
+    $(".op").click(function () {
+        expression += " " + $(this).text() + " ";
+        $("#display").val(expression);
+    });
+
+    $("#equals").click(function () {
+        let result = eval(expression);
+        $("#display").val(result);
+        expression = result.toString();
+    });
+
+    $("#clear").click(function () {
+        expression = "";
+        $("#display").val("");
+    });
+</script>
+
+</body>
+</html>

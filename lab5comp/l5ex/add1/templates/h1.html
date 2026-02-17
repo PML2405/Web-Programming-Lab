@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Exercise - Captcha</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 14px;
+            width: 100%;
+            text-align: left;
+            transition: color 0.3s;
+        }
+        .back:hover { color: #333; }
+
+        .captcha {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            background-color: #eee;
+            color: #444;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            user-select: none;
+            text-decoration: line-through;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff5722;
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+        }
+
+        input:disabled {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #msg {
+            margin-top: 20px;
+            font-weight: 600;
+            min-height: 24px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <a class="back" href="{% url 'index' %}">← Back to Index</a>
+
+    <h2>Captcha Validation</h2>
+
+    <div class="captcha" id="cap">A7X9P</div>
+
+    <input type="text" id="inp" placeholder="Enter code" maxlength="6">
+    
+    <button id="btn" onclick="check()">Submit</button>
+
+    <p id="msg"></p>
+</div>
+
+<script>
+    let attempts = 0;
+
+    function check() {
+        let cap = document.getElementById("cap").innerText;
+        let inp = document.getElementById("inp");
+        let msg = document.getElementById("msg");
+        let btn = document.getElementById("btn");
+
+        if (inp.value === cap) {
+            msg.innerText = "Captcha Matched";
+            msg.style.color = "#2e7d32";
+            inp.style.borderColor = "#2e7d32";
+        } else {
+            attempts++;
+            msg.innerText = "Mismatch Attempt " + attempts;
+            msg.style.color = "#d32f2f";
+            inp.style.borderColor = "#d32f2f";
+            inp.value = ""; 
+            inp.focus();
+
+            if (attempts > 3) {
+                inp.disabled = true;
+                btn.disabled = true;
+                msg.innerText = "Textbox Disabled";
+                msg.style.color = "#555";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
