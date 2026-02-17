@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #output {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <label>Enter Name:</label>
+    <input type="text" id="name">
+</div>
+
+<div>
+    <input type="checkbox" id="bold">
+    <label for="bold">BOLD</label>
+
+    <input type="checkbox" id="italic">
+    <label for="italic">ITALIC</label>
+
+    <input type="checkbox" id="underline">
+    <label for="underline">UNDERLINE</label>
+</div>
+
+<div>
+    <input type="radio" name="color" value="red">RED
+    <input type="radio" name="color" value="green">GREEN
+    <input type="radio" name="color" value="pink">PINK
+</div>
+
+<div>
+    <label>Enter Message:</label><br>
+    <textarea id="msg" rows="5" cols="30"></textarea>
+</div>
+
+<div>
+    <button id="display">Display</button>
+    <button id="clear">Clear</button>
+    <button id="exit">Exit</button>
+</div>
+
+<div id="output"></div>
+
+<script>
+$(document).ready(function(){
+
+    $("#display").click(function(){
+        var name = $("#name").val();
+        var msg = $("#msg").val();
+        var text = "Name: " + name + " Message: " + msg;
+
+        $("#output").text(text);
+
+        $("#output").css("font-weight", $("#bold").is(":checked") ? "bold" : "normal");
+        $("#output").css("font-style", $("#italic").is(":checked") ? "italic" : "normal");
+        $("#output").css("text-decoration", $("#underline").is(":checked") ? "underline" : "none");
+
+        var color = $("input[name='color']:checked").val();
+        if(color){
+            $("#output").css("color", color);
+        }
+    });
+
+    $("#clear").click(function(){
+        $("#name").val("");
+        $("#msg").val("");
+        $("input[type='checkbox']").prop("checked", false);
+        $("input[name='color']").prop("checked", false);
+        $("#output").text("").removeAttr("style");
+    });
+
+    $("#exit").click(function(){
+        window.close();
+    });
+
+});
+</script>
+
+</body>
+</html>
