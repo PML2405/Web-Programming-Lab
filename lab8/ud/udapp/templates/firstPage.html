@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First Page</title>
+</head>
+<body>
+
+<h2>Enter Details</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    Name: {{ form.name }} <br><br>
+    Roll: {{ form.roll }} <br><br>
+    Subject: {{ form.subject }} <br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
