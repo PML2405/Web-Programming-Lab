@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show data</title>
+</head>
+<body>
+    <h1>Website Directory</h1>
+
+    <h2>Categories</h2>
+    <ul>
+        {% for cat in categories %}
+            <li>{{ cat.name }} - Visits: {{ cat.visits }} - Likes: {{ cat.likes }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Pages</h2>
+    <ul>
+        {% for page in pages %}
+            <li>
+                {{ page.title }} |
+                <a href="{{ page.url }}">{{ page.url }}</a> |
+                Views: {{ page.views }} |
+                Category: {{ page.category.name }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="/add-category/">Add Category</a><br>
+    <a href="/add-page/">Add Page</a>
+</body>
+</html>

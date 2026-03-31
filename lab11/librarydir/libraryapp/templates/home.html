@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Add Author</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ aform.as_p }}
+        <button name="author">Save</button>
+    </form>
+
+    <h2>Add Publisher</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ pform.as_p }}
+        <button name="publisher">Save</button>
+    </form>
+
+    <h2>Add Book</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ bform.as_p }}
+        <button name="book">Save</button>
+    </form>
+
+    <hr>
+
+    <h2>Books</h2>
+    <ul>
+    {% for b in books %}
+        <li>
+            {{ b.title }} - {{ b.publisher.name }} -
+            {% for a in b.authors.all %}
+                {{ a.first_name }},
+            {% empty %}
+                No authors
+            {% endfor %}
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

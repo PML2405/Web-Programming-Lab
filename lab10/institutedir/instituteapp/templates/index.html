@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Institutes</title>
+</head>
+<body>
+
+<h2>Institute List</h2>
+
+<select>
+    {% for i in institutes %}
+        <option>{{ i.name }}</option>
+    {% endfor %}
+</select>
+
+</body>
+</html>

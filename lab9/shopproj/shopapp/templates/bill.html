@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill</title>
+</head>
+<body>
+
+<h2>Bill</h2>
+
+<p>Brand: {{ brand }}</p>
+
+<p>Items:
+{% for i in items %}
+    {{ i }}
+{% endfor %}
+</p>
+
+<p>Quantity: {{ qty }}</p>
+
+<p>Total Amount: {{ total }}</p>
+
+<a href="/">Back</a>
+
+</body>
+</html>
