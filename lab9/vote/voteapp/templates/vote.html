@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+</head>
+<body>
+    <h2>How is the book ASP.NET with C# by Vipul Prakashan?</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="radio" name="choice" value="good"> Good <br>
+        <input type="radio" name="choice" value="satisfactory"> Satisfactory <br>
+        <input type="radio" name="choice" value="bad"> Bad <br>
+
+        <button type="submit">Vote</button>
+    </form>
+    <br>
+
+    {% if percent %}
+    <h3>Results:</h3>
+
+    <p>Good: {{percent.good|floatformat:0}}%</p>
+    <p>Satisfactory: {{percent.satisfactory|floatformat:0}}%</p>
+    <p>Bad: {{percent.bad|floatformat:0}}%</p>
+
+    {% endif %}
+
+</body>
+</html>
