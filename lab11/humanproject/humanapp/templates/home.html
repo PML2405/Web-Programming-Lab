@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Human Database</title>
+</head>
+<body>
+
+<h2>Human Details</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- DROPDOWN -->
+    <label>Select Name:</label>
+    <select name="id" onchange="this.form.submit()">
+        <option value="">--Select--</option>
+        {% for h in humans %}
+        <option value="{{ h.id }}"
+            {% if selected and h.id == selected.id %}selected{% endif %}>
+            {{ h.first_name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <!-- TEXTBOXES -->
+    Last Name:
+    <input type="text" name="last_name" value="{{ selected.last_name|default:'' }}"><br><br>
+
+    Phone:
+    <input type="text" name="phone" value="{{ selected.phone|default:'' }}"><br><br>
+
+    Address:
+    <input type="text" name="address" value="{{ selected.address|default:'' }}"><br><br>
+
+    City:
+    <input type="text" name="city" value="{{ selected.city|default:'' }}"><br><br>
+
+    <!-- BUTTONS -->
+    <button type="submit" name="update">Update</button>
+    <button type="submit" name="delete">Delete</button>
+
+</form>
+
+</body>
+</html>
